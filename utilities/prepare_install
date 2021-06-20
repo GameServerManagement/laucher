@@ -1,7 +1,0 @@
-#!/bin/bash
-
-locationGSM=/usr/GSM
-
-if [ ! -d $locationGSM ]; then
-  sudo mkdir -p $locationGSM
-fi
