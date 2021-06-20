@@ -4,6 +4,4 @@ read -r -p $'Please enter the game which you want to install: ' gameName
 
 if [ "$gameName" = "sampserver" ]; then
   echo \-e "\033[0m$gameName\033[0m will be installed soon."
-else
-  echo \-e "\033[0;31mInvalid game, please try again!\033[0m"
 fi
