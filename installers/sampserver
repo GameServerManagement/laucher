@@ -6,17 +6,13 @@ serverNumber=0
 created=0
 
 for i in {1..100000000000000000}; do
-  
-  if [ -d "$locationServer-$i" ]; then
-    continue
-  else
+  if [ ! -d "$locationServer-$i" ]; then
     sudo mkdir -p "$locationServer-$i"
     locationServer="$locationServer-$i"
     created=1
     serverNumber=$i
     break
   fi
-  
 done
 
 if [ created = 1 ]; then
