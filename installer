@@ -14,7 +14,7 @@ done
 
 if [ $exists = 1 ]; then
   
-  wget https://raw.githubusercontent.com/GameServerManagement/laucher/main/installers/$gameName installScript
+  wget -q -O installScript https://raw.githubusercontent.com/GameServerManagement/laucher/main/installers/$gameName
   dos2unix -q installScript
   sudo bash installScript
   sudo rm -rf installScript
