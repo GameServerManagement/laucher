@@ -29,8 +29,8 @@ if [ $created = 1 ]; then
   # Setting up Server Files with random RCON Password
   mkdir -p $userLocationServer
   cd $userLocationServer
-  curl --silent https://github.com/GameServerManagement/laucher/raw/main/cdn/sampserver.tar.gz > server.tar.gz
-  tar xzf server.tar.gz && rm -f server.tar.gz
+  curl --silent https://github.com/GameServerManagement/laucher/raw/main/cdn/sampserver.tar.gz
+  tar xzf sampserver.tar.gz && rm -f sampserver.tar.gz
   cd samp03 && mv * .. && cd ..
   rm -r samp03
   randomRconPassword=$( tr -dc A-Za-z0-9 </dev/urandom | head -c 16; echo '' )
