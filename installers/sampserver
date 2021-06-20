@@ -43,8 +43,7 @@ installationPath=$locationServer
 serverID=$serverNumber
 
 EOM
-
-  stopSeconds=$(date +%s)
+  stopSeconds=$( echo "date +%s" )
 
   echo \-e "\033[0;32mSuccess: \033[0mThe server sampserver-$serverNumber has been succesfully installed.\033[0m"
   echo ""
