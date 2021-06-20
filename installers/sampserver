@@ -49,8 +49,6 @@ installationPath=$userLocationServer
 serverID=$serverNumber
 
 EOM
-  declare -i stopSeconds
-  stopSeconds=$( date +%s )
 
   echo \-e "\033[0;32mSuccess: \033[0mThe server sampserver-$serverNumber has been succesfully installed.\033[0m"
   echo ""
