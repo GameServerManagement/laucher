@@ -5,6 +5,8 @@ locationServer=/usr/GSM/sampserver
 serverNumber=0
 created=0
 
+echo "testingCache"
+
 for (( i=0; i<=100000000; i++ ))
 do
   if [ ! -d "$locationServer-$i" ]; then
