@@ -8,6 +8,7 @@ read -r -p $'Please enter the game which you want to install: ' gameName
 for i in ${supportedGames[@]}; do
   if [ $exists = 0 ] && [ "$i" = "$gameName" ]; then
     exists=1
+    break
   fi
 done
 
