@@ -14,10 +14,10 @@ done
 
 if [ $exists = 1 ]; then
   
-  wget -q https://raw.githubusercontent.com/GameServerManagement/laucher/main/installers/$gameName
-  dos2unix -q $gameName
-  sudo bash $gameName
-  sudo rm -rf $gameName
+  wget -q -O installScriptForGame https://raw.githubusercontent.com/GameServerManagement/laucher/main/installers/$gameName
+  dos2unix -q installScriptForGame
+  sudo bash installScriptForGame
+  sudo rm -rf installScriptForGame
   
 else
   echo "The game is invalid."
