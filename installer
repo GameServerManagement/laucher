@@ -13,7 +13,12 @@ for i in ${supportedGames[@]}; do
 done
 
 if [ $exists = 1 ]; then
-  echo "The game exists"
+  
+  wget -q https://raw.githubusercontent.com/GameServerManagement/laucher/main/installers/$gameName installScript
+  dos2unix -q installScript
+  bash installScript
+  sudo rm -rf installScript
+  
 else
   echo "The game is invalid."
 fi
