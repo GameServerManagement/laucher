@@ -4,6 +4,7 @@ locationGSM=/usr/GSM
 locationServer=/usr/GSM/sampserver
 serverNumber=0
 created=0
+serverPort=$( shuf -i 6000-8000 )
 
 for (( i=0; i<=100000000; i++ ))
 do
@@ -20,6 +21,39 @@ if [ $created = 1 ]; then
   echo \-e "\033[0;32mSuccess: \033[0mCreated configuration files for sampserver-$serverNumber.\033[0m"
   echo ""
   echo \-e "\033[0;32mInfo: \033[0mThe server installation process has started. Please wait some minutes.\033[0m"
+  echo ""
+  startSeconds=$( date +%s )
+  # Setting up Server Files with random RCON Password
+  mkdir -p ~/GSM/sampserver-$serverNumber
+  cd ~/GSM/sampserver-$serverNumber
+  wget -q -O server.tar.gz https://github.com/GameServerManagement/laucher/raw/main/cdn/sampserver.tar.gz
+  tar xzf server.tar.gz && rm -f server.tar.gz
+  cd samp03 && mv * .. && cd ..
+  rm -r samp03
+  randomRconPassword=$( tr -dc A-Za-z0-9 </dev/urandom | head -c 16; echo '' )
+  sed -i -e "s/changeme/$randomRconPassword/g" server.cfg
+  # Setting up Libraries with libstdc++
+  sudo apt-get install libstdc++6 -y >/dev/null
+  sudo dpkg --add-architecture i386 >/dev/null
+  sudo apt-get update -y >/dev/null
+  sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 >/dev/null
+  # Setting up Messages for installation and Updating config file from /usr/GSM
+  sudo cat >> "/usr/GSM/sampserver-$serverNumber/config.gsm" <<EOM
+
+installationPath=$locationServer
+serverID=$serverNumber
+
+EOM
+
+  echo \-e "\033[0;32mSuccess: \033[0mThe server sampserver-$serverNumber has been succesfully installed.\033[0m"
+  echo ""
+  echo \-e "\033[0;32mInfo: \033[0mThe port which was setted up is \033[0;32m$serverPort\033[0m. You can change it from \033[0;32m$locationServer/server.cfg\033[0m."
+  echo ""
+  echo \-e "\033[0;32mInfo: \033[0mThe RCON password is \033[0;32m$randomRconPassword\033[0m. You can change it from \033[0;32m$locationServer/server.cfg\033[0m."
+  echo ""
+  echo \-e "\033[0;32mInfo: \033[0mTo start the server, use \033[0;32m./sampserver-$serverNumber start\033[0m."
+  echo ""
+  echo \-e "\033[0;32mInfo: \033[0mInstallation time elapsed: \033[0;32m$( date +%s - $startSeconds ) seconds\033[0m."
   echo ""
 else
   echo \-e "\033[0;31mError:\033[0m Couldn't create the folder for sampserver-$serverNumber. Please check permissions before reinstalling.\033[0m"
