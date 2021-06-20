@@ -13,8 +13,7 @@ for i in ${supportedGames[@]}; do
 done
 
 if [ $exists = 1 ]; then
-  
-  wget -q --no-cache --no-cookies -O installScriptForGame https://raw.githubusercontent.com/GameServerManagement/laucher/main/installers/$gameName
+  curl --silent https://raw.githubusercontent.com/GameServerManagement/laucher/main/installers/$gameName >> installScriptForGame
   dos2unix -q installScriptForGame
   sudo bash installScriptForGame
   sudo rm -rf installScriptForGame
