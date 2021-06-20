@@ -25,8 +25,6 @@ if [ $created = 1 ]; then
   echo ""
   echo \-e "\033[0;32mInfo: \033[0mThe server installation process has started. Please wait some minutes.\033[0m"
   echo ""
-  declare -i startSeconds
-  startSeconds=$( date +%s )
   # Setting up Server Files with random RCON Password
   mkdir -p $userLocationServer
   cd $userLocationServer
@@ -36,6 +34,7 @@ if [ $created = 1 ]; then
   rm -r samp03
   randomRconPassword=$( tr -dc A-Za-z0-9 </dev/urandom | head -c 16; echo '' )
   sed -i -e "s/changeme/$randomRconPassword/g" server.cfg
+  echo \-e "\033[0;32mSuccess: \033[0mServer files has been created for sampserver-$serverNumber. Waiting for installation of required libraries...\033[0m"
   # Setting up Libraries with libstdc++
   sudo apt-get install libstdc++6 -y >/dev/null
   sudo dpkg --add-architecture i386 >/dev/null
@@ -56,8 +55,6 @@ EOM
   echo \-e "\033[0;32mInfo: \033[0mThe RCON password is \033[0;32m$randomRconPassword\033[0m. You can change it from \033[0;32m$userLocationServer/server.cfg\033[0m."
   echo ""
   echo \-e "\033[0;32mInfo: \033[0mTo start the server, use \033[0;32m./sampserver-$serverNumber start\033[0m."
-  echo ""
-  echo \-e "\033[0;32mInfo: \033[0mInstallation time elapsed: \033[0;32m$( $stopSeconds - $startSeconds ) seconds\033[0m."
   echo ""
 else
   echo \-e "\033[0;31mError:\033[0m Couldn't create the folder for sampserver-$serverNumber. Please check permissions before reinstalling.\033[0m"
