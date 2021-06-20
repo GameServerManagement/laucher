@@ -1,0 +1,29 @@
+#!/bin/bash
+
+locationGSM=/usr/GSM
+locationServer=/usr/GSM/sampserver
+serverNumber=0
+created=0
+
+for i in {1..100000000000000000} do
+  
+  if [ -d "$locationServer-$i" ]; then
+    continue
+  else
+    sudo mkdir -p "$locationServer-$i"
+    locationServer="$locationServer-$i"
+    created=1
+    serverNumber=$i
+    break
+  fi
+  
+done
+
+if [ created = 1 ]; then
+  echo \-e "\033[0;32mSuccess: \033[0mCreated configuration files for sampserver-$serverNumber.\033[0m"
+  echo ""
+  echo \-e "\033[0;32mInfo: \033[0mThe server installation process has started. Please wait some minutes.\033[0m"
+  echo ""
+else
+  echo \-e "\033[0;31mError:\033[0m Couldn't create the folder for sampserver-$serverNumber. Please check permissions before reinstalling.\033[0m"
+fi
