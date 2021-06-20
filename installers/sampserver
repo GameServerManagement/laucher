@@ -5,7 +5,8 @@ locationServer=/usr/GSM/sampserver
 serverNumber=0
 created=0
 
-for i in {1..100000000000000000} do
+for i in {1..700} 
+do
   if [ ! -d "$locationServer-$i" ]; then
     sudo mkdir -p "$locationServer-$i"
     locationServer="$locationServer-$i"
