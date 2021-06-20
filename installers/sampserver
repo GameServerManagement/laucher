@@ -2,6 +2,10 @@
 
 locationGSM=/usr/GSM
 locationServer=/usr/GSM/sampserver
+userLocationServer=/home/$(whoami)/GSM/sampserver
+if [ "$(whoami)" = "root" ]; then
+  userLocationServer=/root/GSM/sampserver
+fi
 serverNumber=0
 created=0
 
@@ -21,10 +25,11 @@ if [ $created = 1 ]; then
   echo ""
   echo \-e "\033[0;32mInfo: \033[0mThe server installation process has started. Please wait some minutes.\033[0m"
   echo ""
+  declare -i startSeconds
   startSeconds=$( date +%s )
   # Setting up Server Files with random RCON Password
-  mkdir -p ~/GSM/sampserver-$serverNumber
-  cd ~/GSM/sampserver-$serverNumber
+  mkdir -p $userLocationServer
+  cd $userLocationServer
   wget -q -O server.tar.gz https://github.com/GameServerManagement/laucher/raw/main/cdn/sampserver.tar.gz
   tar xzf server.tar.gz && rm -f server.tar.gz
   cd samp03 && mv * .. && cd ..
@@ -39,15 +44,16 @@ if [ $created = 1 ]; then
   # Setting up Messages for installation and Updating config file from /usr/GSM
   sudo cat >> "/usr/GSM/sampserver-$serverNumber/config.gsm" <<EOM
 
-installationPath=$locationServer
+installationPath=$userLocationServer
 serverID=$serverNumber
 
 EOM
-  stopSeconds=$( echo "date +%s" )
+  declare -i stopSeconds
+  stopSeconds=$( date +%s )
 
   echo \-e "\033[0;32mSuccess: \033[0mThe server sampserver-$serverNumber has been succesfully installed.\033[0m"
   echo ""
-  echo \-e "\033[0;32mInfo: \033[0mThe RCON password is \033[0;32m$randomRconPassword\033[0m. You can change it from \033[0;32m$locationServer/server.cfg\033[0m."
+  echo \-e "\033[0;32mInfo: \033[0mThe RCON password is \033[0;32m$randomRconPassword\033[0m. You can change it from \033[0;32m$userLocationServer/server.cfg\033[0m."
   echo ""
   echo \-e "\033[0;32mInfo: \033[0mTo start the server, use \033[0;32m./sampserver-$serverNumber start\033[0m."
   echo ""
