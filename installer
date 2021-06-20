@@ -1,7 +1,18 @@
 #!/bin/bash
 
+supportedGames=("sampserver")
+exists=0
+
 read -r -p $'Please enter the game which you want to install: ' gameName
 
-if [ "$gameName" = "sampserver" ]; then
-  echo \-e "\033[0m$gameName\033[0m will be installed soon."
+for i in ${supportedGames[@]}; do
+  if [ $exists = 0 ] && [ "$i" = "$gameName" ]; then
+    exists=1
+  fi
+done
+
+if [ $exists = 1 ]; then
+  echo "The game exists"
+else
+  echo "The game is invalid."
 fi
