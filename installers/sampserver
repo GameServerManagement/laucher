@@ -10,7 +10,6 @@ do
   if [ ! -d "$locationServer-$i" ]; then
     sudo mkdir -p "$locationServer-$i"
     locationServer="$locationServer-$i"
-    echo $locationServer
     created=1
     serverNumber=$i
     break
