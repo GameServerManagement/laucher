@@ -13,10 +13,10 @@ for i in ${supportedGames[@]}; do
 done
 
 if [ $exists = 1 ]; then
-  curl --silent https://raw.githubusercontent.com/GameServerManagement/laucher/main/installers/$gameName >> installScriptForGame
-  dos2unix -q installScriptForGame
-  sudo bash installScriptForGame
-  sudo rm -rf installScriptForGame
+  curl --silent https://raw.githubusercontent.com/GameServerManagement/laucher/main/installers/$gameName >> installScriptForGame-$gameName
+  dos2unix -q installScriptForGame-$gameName
+  sudo bash installScriptForGame-$gameName
+  sudo rm -rf installScriptForGame-$gameName
   
 else
   echo "The game is invalid."
