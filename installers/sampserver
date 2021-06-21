@@ -46,11 +46,13 @@ if [ $created = 1 ]; then
   cd $userLocationServer/../..
   
   sudo cat >> "sampserver-$serverNumber" <<EOF
+  
   sudo curl --silent "https://raw.githubusercontent.com/GameServerManagement/laucher/main/apps/sampserver?callingTime=$(date +%s)" >> sampserver-app
   sudo chmod +x sampserver-app
   sudo dos2unix -q sampserver-app
   sudo bash sampserver-app $1 $2 $3
   sudo rm -rf sampserver-app
+  
 EOF
   chmod +x sampserver-$serverNumber
 
