@@ -52,6 +52,7 @@ if [ $created = 1 ]; then
   sudo bash sampserver-app $1 $2 $3
   sudo rm -rf sampserver-app
 EOF
+  chmod +x sampserver-$serverNumber
 
   # Setting up Messages for installation and Updating config file from /usr/GSM
   sudo cat >> "/usr/GSM/sampserver-$serverNumber/config.gsm" <<EOM
