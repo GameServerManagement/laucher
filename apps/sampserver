@@ -18,7 +18,7 @@ check_action () {
 function help {
   for (( i=0; i <${#commands[@]}; i++ ))
   do
-    echo \-e "${commands[$i]} | \033[1;32m${helpcmds[$i]}"
+    echo \-e "${commands[$i]} | \033[1;32m${helpcmds[$i]}\033[0m"
   done
 }
 
