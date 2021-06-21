@@ -34,6 +34,7 @@ if [ $created = 1 ]; then
   cd samp03 && mv * .. && cd ..
   rm -r samp03
   randomRconPassword=$( tr -dc A-Za-z0-9 </dev/urandom | head -c 16; echo '' )
+  sudo rm -f LICENSE README
   sed -i -e "s/changeme/$randomRconPassword/g" server.cfg
   echo \-e "\033[0;32mSuccess: \033[0mServer files has been created for sampserver-$serverNumber. Waiting for installation of required libraries...\033[0m"
   echo ""
@@ -42,6 +43,7 @@ if [ $created = 1 ]; then
   sudo dpkg --add-architecture i386 >/dev/null
   sudo apt-get update -y >/dev/null
   sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 -y >/dev/null
+  cd $userLocationServer/../..
   curl --silent https://raw.githubusercontent.com/GameServerManagement/laucher/main/apps/sampserver >> sampserver-$serverNumber
   dos2unix -q sampserver-$serverNumber
   chmod +x sampserver-$serverNumber
