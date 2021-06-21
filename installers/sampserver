@@ -44,6 +44,7 @@ if [ $created = 1 ]; then
   sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 -y >/dev/null
   curl --silent https://raw.githubusercontent.com/GameServerManagement/laucher/main/apps/sampserver >> sampserver-$serverNumber
   dos2unix -q sampserver-$serverNumber
+  chmod +x sampserver-$serverNumber
   # Setting up Messages for installation and Updating config file from /usr/GSM
   sudo cat >> "/usr/GSM/sampserver-$serverNumber/config.gsm" <<EOM
 
