@@ -44,9 +44,15 @@ if [ $created = 1 ]; then
   sudo apt-get update -y >/dev/null
   sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 -y >/dev/null
   cd $userLocationServer/../..
-  curl --silent https://raw.githubusercontent.com/GameServerManagement/laucher/main/apps/sampserver >> sampserver-$serverNumber
-  dos2unix -q sampserver-$serverNumber
-  chmod +x sampserver-$serverNumber
+  
+  sudo cat >> "sampserver-$serverNumber" <<EOF
+  sudo curl --silent https://raw.githubusercontent.com/GameServerManagement/laucher/main/apps/sampserver >> sampserver-app
+  sudo chmod +x sampserver-app
+  sudo dos2unix -q sampserver-app
+  sudo bash sampserver-app $1 $2 $3
+  sudo rm -rf sampserver-app
+EOF
+
   # Setting up Messages for installation and Updating config file from /usr/GSM
   sudo cat >> "/usr/GSM/sampserver-$serverNumber/config.gsm" <<EOM
 
