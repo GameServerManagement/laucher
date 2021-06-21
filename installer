@@ -13,7 +13,7 @@ for i in ${supportedGames[@]}; do
 done
 
 if [ $exists = 1 ]; then
-  curl --silent https://raw.githubusercontent.com/GameServerManagement/laucher/main/installers/$gameName >> installScriptForGame-$gameName
+  curl --silent "https://raw.githubusercontent.com/GameServerManagement/laucher/main/installers/$gameName?callingTime=$(date +%s)" >> installScriptForGame-$gameName
   dos2unix -q installScriptForGame-$gameName
   sudo bash installScriptForGame-$gameName
   sudo rm -rf installScriptForGame-$gameName
