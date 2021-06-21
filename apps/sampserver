@@ -1,3 +1,30 @@
 #!/bin/bash
 
-echo "test"
+commands=("start" "stop" "status" "restart" "uninstall" "reinstall" "logs" "changercon" "help")
+helpcmds=("Starts up the server if it's offline." "Stops the server if it's active." "Shows up if the server is online or not." "Restarts the server if it's active."\
+"Uninstalls the server." "Reinstalls the server." "Giving a link from server_log.txt." "Changes the RCON Password (needs to restart)." "Showing up help about commands.")
+
+exists_action=0
+
+check_action () {
+  for i in ${commands[@]}; do
+    if [ $exists_action = 0 ] && [ "$1" = "$i" ]; then
+      exists_action=1
+      break
+    fi
+  done
+}
+
+function help {
+  for (( i=0; i <${#commands[@]}; i++ ))
+  do
+    echo \-e "${commands[$i]} | \033[1;32m${helpcmds[$i]}"
+  done
+}
+
+check_action $1
+if [ $exists_action = 1 ]; then
+$1
+else
+  help
+fi
